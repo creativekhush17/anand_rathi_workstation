@@ -1,4 +1,4 @@
-const API_BASE_URL = ((import.meta as any).env?.VITE_API_BASE_URL as string) || 'http://127.0.0.1:8000';
+const API_BASE_URL = ((import.meta as any).env?.VITE_API_BASE_URL as string) || 'https://anand-rathi-workstation.onrender.com';
 
 const TOKEN_KEY = 'ar_access_token';
 const REFRESH_TOKEN_KEY = 'ar_refresh_token';
@@ -77,7 +77,7 @@ export async function apiFetch<T>(
 }
 
 export async function checkApiHealth(): Promise<boolean> {
-  const hosts = [API_BASE_URL, 'http://127.0.0.1:8000', 'http://localhost:8000'];
+  const hosts = [API_BASE_URL, 'https://anand-rathi-workstation.onrender.com', 'http://127.0.0.1:8000', 'http://localhost:8000'];
   for (const host of hosts) {
     try {
       const controller = new AbortController();
