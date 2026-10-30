@@ -4,7 +4,8 @@ from sqlalchemy import text
 
 from app.config import settings
 
-engine = create_async_engine(settings.database_url, echo=False, pool_size=10, max_overflow=20)
+connect_args = {"statement_cache_size": 0} if ("pooler" in settings.database_url or "neon.tech" in settings.database_url) else {}
+engine = create_async_engine(settings.database_url, echo=False, pool_size=10, max_overflow=20, connect_args=connect_args)
 AsyncSessionLocal = async_sessionmaker(bind=engine, expire_on_commit=False, class_=AsyncSession)
 
 Base = declarative_base()
