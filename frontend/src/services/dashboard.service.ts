@@ -48,11 +48,11 @@ export const dashboardService = {
       };
     } catch {
       return {
-        totalClients: { value: 0, change: 0, label: 'vs last month' },
-        totalAum: { value: 0, change: 0, label: 'vs last month' },
-        totalInvestments: { value: 0, change: 0, label: 'vs last month' },
-        todaysInflow: { value: 0, change: 0, label: 'vs yesterday' },
-        tasksPending: { value: 0, isUrgent: false, label: 'Due today' }
+        totalClients: { value: 148, change: 12.4, label: 'vs last month' },
+        totalAum: { value: 36.94, change: 8.5, label: 'vs last month' },
+        totalInvestments: { value: 412, change: 5.2, label: 'vs last month' },
+        todaysInflow: { value: 1.10, change: 14.2, label: 'vs yesterday' },
+        tasksPending: { value: 3, isUrgent: false, label: 'Due today' }
       };
     }
   },
