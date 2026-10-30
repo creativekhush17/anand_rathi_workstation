@@ -52,3 +52,13 @@ async def on_startup():
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+
+@app.get("/db/init")
+async def trigger_init_db():
+    try:
+        from init_db import init_database
+        await init_database()
+        return {"status": "ok", "message": "Database schema and seed executed successfully"}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
