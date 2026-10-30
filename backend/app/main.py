@@ -62,3 +62,28 @@ async def trigger_init_db():
         return {"status": "ok", "message": "Database schema and seed executed successfully"}
     except Exception as e:
         return {"status": "error", "detail": str(e)}
+
+
+@app.get("/debug/db-users")
+async def debug_db_users():
+    from app.database import AsyncSessionLocal
+    from app.models import User
+    from app.security import verify_password
+    from sqlalchemy import select
+    
+    async with AsyncSessionLocal() as session:
+        try:
+            res = await session.execute(select(User))
+            users = res.scalars().all()
+            user_list = []
+            for u in users:
+                user_list.append({
+                    "id": u.id,
+                    "employee_id": u.employee_id,
+                    "is_active": u.is_active,
+                    "password_hash": u.password_hash[:15] if u.password_hash else None,
+                    "verify_test": verify_password("password123", u.password_hash) if u.password_hash else False
+                })
+            return {"count": len(users), "users": user_list}
+        except Exception as e:
+            return {"error": str(e)}

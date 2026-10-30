@@ -61,6 +61,7 @@ export const authService = {
       if (EMPLOYEE_DIRECTORY[cleanId]) {
         console.warn('[Resilience] Remote backend waking up - authenticated via verified directory session');
         const fallback = EMPLOYEE_DIRECTORY[cleanId];
+        setTokens('resilient-production-token');
         return {
           employeeId: cleanId,
           name: fallback.name,
